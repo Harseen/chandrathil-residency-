@@ -1,0 +1,1730 @@
+/* ==========================================================================
+   Chandrathil Residency - Apple-Inspired Design System
+   Refined, calm, high-precision typography, subtle shadows, and tactile feel.
+   ========================================================================== */
+
+:root {
+  /* Apple Palette */
+  --bg-primary: #F5F5F7;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #FBFBFD;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-card: rgba(255, 255, 255, 0.92);
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Text Colors */
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --text-tertiary: #A1A1A6;
+  --text-on-accent: #FFFFFF;
+
+  /* Accents & States */
+  --accent-blue: #0071E3;
+  --accent-blue-hover: #0077ED;
+  --accent-blue-active: #005BB5;
+  --accent-blue-subtle: #E8F2FE;
+  --accent-blue-border: rgba(0, 113, 227, 0.2);
+
+  --accent-green: #34C759;
+  --accent-green-subtle: #EAF9EE;
+  --accent-green-text: #248A3D;
+  --accent-green-border: rgba(52, 199, 89, 0.25);
+
+  --accent-amber: #FF9500;
+  --accent-amber-subtle: #FFF8EB;
+  --accent-amber-text: #B26A00;
+  --accent-amber-border: rgba(255, 149, 0, 0.25);
+
+  --accent-red: #FF3B30;
+  --accent-red-hover: #E0352B;
+  --accent-red-subtle: #FEECEB;
+  --accent-red-text: #D70015;
+  --accent-red-border: rgba(255, 59, 48, 0.25);
+
+  /* Lines & Dividers */
+  --border-light: rgba(0, 0, 0, 0.07);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-card: rgba(0, 0, 0, 0.05);
+
+  /* Shadows (Apple layered multi-depth shadows) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 24px 60px -10px rgba(0, 0, 0, 0.2), 0 10px 24px -5px rgba(0, 0, 0, 0.08);
+
+  /* Geometry */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-normal: 250ms cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #1D1D1F 0%, #3A3A3C 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.brand-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.brand-text h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.brand-text p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.badge-tag {
+  display: inline-block;
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   Month Navigator Pill Bar
+   ========================================================================== */
+.month-navigator {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  box-shadow: var(--shadow-xs);
+  position: relative;
+}
+
+.nav-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.nav-arrow-btn:hover {
+  background: var(--bg-primary);
+  color: var(--accent-blue);
+}
+
+.current-month-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
+}
+
+.current-month-display:hover {
+  background: var(--bg-primary);
+}
+
+.current-month-display svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary);
+}
+
+.today-chip-btn {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background: var(--accent-blue-subtle);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.today-chip-btn:hover {
+  background: #D9EBFE;
+}
+
+/* Secondary header buttons */
+.icon-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-xs);
+}
+
+.icon-action-btn:hover {
+  color: var(--text-primary);
+  border-color: rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Main Content Container
+   ========================================================================== */
+.main-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+  width: 100%;
+  flex: 1;
+}
+
+/* ==========================================================================
+   Summary Dashboard / Metrics Cards
+   ========================================================================== */
+.summary-section {
+  margin-bottom: 32px;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.month-context-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.metric-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: 22px 20px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.metric-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.metric-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+}
+
+.metric-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-icon-wrap.green {
+  background: var(--accent-green-subtle);
+  color: var(--accent-green-text);
+}
+
+.metric-icon-wrap.amber {
+  background: var(--accent-amber-subtle);
+  color: var(--accent-amber-text);
+}
+
+.metric-icon-wrap.blue {
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+}
+
+.metric-icon-wrap.purple {
+  background: #F4EEFF;
+  color: #7943DB;
+}
+
+.metric-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.metric-number {
+  font-size: 1.95rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.metric-number.collected {
+  color: var(--accent-green-text);
+}
+
+.metric-number.due {
+  color: var(--accent-amber-text);
+}
+
+.metric-subtext {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Micro Progress Bar in Metric Cards */
+.metric-progress-bar {
+  width: 100%;
+  height: 5px;
+  background: #EFEFF4;
+  border-radius: var(--radius-full);
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.metric-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-smooth);
+}
+
+.metric-progress-fill.green {
+  background: var(--accent-green);
+}
+
+.metric-progress-fill.amber {
+  background: var(--accent-amber);
+}
+
+.metric-progress-fill.blue {
+  background: var(--accent-blue);
+}
+
+/* ==========================================================================
+   Controls Bar: Filter, Search, Quick Actions
+   ========================================================================== */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.segmented-control {
+  display: inline-flex;
+  background: #E5E5EA;
+  padding: 3px;
+  border-radius: var(--radius-md);
+  user-select: none;
+}
+
+.segment-btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: 9px;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.segment-btn:hover {
+  color: var(--text-primary);
+}
+
+.segment-btn.active {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.segment-count {
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.segment-btn.active .segment-count {
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+}
+
+.filter-search-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+}
+
+.search-input {
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  padding: 8px 14px 8px 36px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  outline: none;
+  width: 220px;
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-subtle);
+  width: 260px;
+}
+
+.view-toggle-btn {
+  display: none;
+}
+
+/* ==========================================================================
+   Room Cards Grid (8 Rooms)
+   ========================================================================== */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.room-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.room-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Specific styling for occupied room cards */
+.room-card.status-occupied {
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.room-card.status-occupied.paid {
+  border-left: 4px solid var(--accent-green);
+}
+
+.room-card.status-occupied.due {
+  border-left: 4px solid var(--accent-amber);
+}
+
+/* Specific styling for vacant room cards */
+.room-card.status-vacant {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFC 100%);
+  border: 1.5px dashed rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.room-card.status-vacant:hover {
+  border-color: var(--accent-blue);
+  border-style: solid;
+}
+
+/* Card Header */
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.room-badge {
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1D1D1F;
+  background: #F2F2F7;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.room-badge-number {
+  font-size: 0.95rem;
+}
+
+.occupancy-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.occupancy-pill.occupied {
+  background: var(--accent-green-subtle);
+  color: var(--accent-green-text);
+  border: 1px solid var(--accent-green-border);
+}
+
+.occupancy-pill.vacant {
+  background: #EFEFF4;
+  color: #636366;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Rent Tag inside Card */
+.room-rent-tag {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.rent-currency {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.rent-period {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+/* Occupied Card Body */
+.tenant-info-block {
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.tenant-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.tenant-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.tenant-phone-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.phone-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 0;
+  transition: color var(--transition-fast);
+}
+
+.phone-link:hover {
+  text-decoration: underline;
+  color: var(--accent-blue-hover);
+}
+
+.phone-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.copy-phone-btn {
+  color: var(--text-tertiary);
+  padding: 2px;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.copy-phone-btn:hover {
+  color: var(--text-primary);
+  background: #E5E5EA;
+}
+
+.tenant-notes {
+  background: #F7F7F9;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  border-left: 2px solid var(--border-medium);
+  margin-top: 6px;
+  max-height: 60px;
+  overflow-y: auto;
+}
+
+.tenant-notes.empty {
+  font-style: italic;
+  color: var(--text-tertiary);
+  background: transparent;
+  border-left: none;
+  padding: 0;
+}
+
+/* Month Payment Status Block inside Card */
+.payment-status-block {
+  background: #FAFAFC;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 14px;
+  transition: all var(--transition-fast);
+}
+
+.payment-status-block.paid {
+  background: var(--accent-green-subtle);
+  border-color: var(--accent-green-border);
+}
+
+.payment-status-block.due {
+  background: var(--accent-amber-subtle);
+  border-color: var(--accent-amber-border);
+}
+
+.payment-status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.payment-status-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.payment-badge {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.payment-badge.paid {
+  background: #FFFFFF;
+  color: var(--accent-green-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.payment-badge.due {
+  background: #FFFFFF;
+  color: var(--accent-amber-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.payment-date-info {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Card Button Actions */
+.card-actions-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.btn-primary-payment {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.84rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary-payment.mark-paid {
+  background: var(--accent-green);
+  color: #FFFFFF;
+}
+
+.btn-primary-payment.mark-paid:hover {
+  background: #2EB14F;
+  box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
+}
+
+.btn-primary-payment.undo-paid {
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+}
+
+.btn-primary-payment.undo-paid:hover {
+  background: #F2F2F7;
+  color: var(--text-primary);
+}
+
+.card-secondary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.btn-subtle {
+  padding: 6px 10px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: #F2F2F7;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+.btn-subtle:hover {
+  background: #E5E5EA;
+  color: var(--text-primary);
+}
+
+.btn-subtle.vacate-btn {
+  color: var(--accent-red-text);
+  background: var(--accent-red-subtle);
+}
+
+.btn-subtle.vacate-btn:hover {
+  background: #FDD8D6;
+}
+
+.whatsapp-reminder-btn {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #128C7E;
+  background: #E7F7F4;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 4px;
+  transition: all var(--transition-fast);
+}
+
+.whatsapp-reminder-btn:hover {
+  background: #D2F2EB;
+}
+
+/* Vacant Card Body */
+.vacant-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 8px 16px;
+  flex: 1;
+}
+
+.vacant-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #F2F2F7;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  transition: all var(--transition-fast);
+}
+
+.room-card.status-vacant:hover .vacant-icon-circle {
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+  transform: scale(1.05);
+}
+
+.vacant-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.vacant-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  max-width: 200px;
+}
+
+.btn-assign-tenant {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.btn-assign-tenant:hover {
+  background: var(--accent-blue-hover);
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Modals & Overlays (Apple Sheet Style)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-sheet {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: var(--shadow-modal);
+  transform: scale(0.96) translateY(10px);
+  transition: transform var(--transition-normal);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.modal-overlay.active .modal-sheet {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header {
+  padding: 20px 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.modal-title-group h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.modal-title-group p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.modal-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F2F2F7;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: #E5E5EA;
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.form-label span.req {
+  color: var(--accent-red);
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-medium);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-subtle);
+}
+
+.form-help {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.modal-footer {
+  padding: 16px 24px 20px;
+  background: #FAFAFC;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-secondary {
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: #F2F2F7;
+}
+
+.btn-save {
+  padding: 9px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--accent-blue);
+  transition: all var(--transition-fast);
+}
+
+.btn-save:hover {
+  background: var(--accent-blue-hover);
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.25);
+}
+
+.btn-danger {
+  padding: 9px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--accent-red);
+  transition: all var(--transition-fast);
+}
+
+.btn-danger:hover {
+  background: var(--accent-red-hover);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.25);
+}
+
+/* Receipt Preview Modal */
+.receipt-card {
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  background: #FFFFFF;
+}
+
+.receipt-header {
+  text-align: center;
+  border-bottom: 1px dashed var(--border-medium);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.receipt-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.receipt-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+}
+
+.receipt-row.bold {
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-top: 1px solid var(--border-light);
+  padding-top: 10px;
+  margin-top: 12px;
+}
+
+/* ==========================================================================
+   Toast Notification Pill
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: rgba(29, 29, 31, 0.94);
+  color: #FFFFFF;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: auto;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  padding: 20px 24px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-btn-link {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-btn-link:hover {
+  color: var(--accent-blue);
+}
+
+/* ==========================================================================
+   Print Styles for Official Receipts
+   ========================================================================== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #receiptModal, #receiptModal * {
+    visibility: visible;
+  }
+  #receiptModal {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    background: #FFFFFF !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    opacity: 1 !important;
+  }
+  .modal-sheet {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    max-width: 600px !important;
+    margin: 20px auto !important;
+    transform: none !important;
+  }
+  .modal-close-btn, .modal-footer {
+    display: none !important;
+  }
+  .receipt-card {
+    border: none !important;
+    padding: 10px !important;
+  }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints - Mobile 3-Row Grid System
+   8 rooms in 3 rows on mobile: Row 1 (R1, R2, R3), Row 2 (R4, R5, R6), Row 3 (R7, R8)
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rooms-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    padding: 16px 12px 60px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 14px;
+    gap: 12px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .month-navigator {
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .current-month-display {
+    padding: 0 8px;
+    font-size: 0.85rem;
+  }
+
+  .controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .segmented-control {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .segmented-control::-webkit-scrollbar {
+    display: none;
+  }
+
+  .segment-btn {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+
+  .filter-search-group {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  .search-box {
+    flex: 1;
+  }
+
+  .search-input {
+    width: 100% !important;
+    padding: 7px 12px 7px 32px;
+    font-size: 0.8rem;
+  }
+
+  /* Mobile View Toggle Button (3-Row Grid vs List) */
+  .view-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    padding: 6px 10px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    gap: 5px;
+    box-shadow: var(--shadow-xs);
+  }
+
+  /* Metric cards on mobile - 2x2 grid */
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .metric-card {
+    padding: 14px 12px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  .metric-header {
+    margin-bottom: 6px !important;
+  }
+
+  .metric-label {
+    font-size: 0.74rem !important;
+  }
+
+  .metric-icon-wrap {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 8px !important;
+  }
+
+  .metric-icon-wrap svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .metric-number {
+    font-size: 1.4rem !important;
+  }
+
+  .metric-subtext {
+    font-size: 0.68rem !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     MOBILE ROOMS GRID (Rooms 101–113)
+     Generous, touch-friendly room cards with 2-column grid and enlarged details
+     -------------------------------------------------------------------------- */
+  .rooms-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .room-card {
+    padding: 18px 14px !important;
+    border-radius: var(--radius-xl) !important;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+    border-width: 1.5px !important;
+  }
+
+  .room-card:active {
+    transform: scale(0.98);
+  }
+
+  .card-top-row {
+    margin-bottom: 10px !important;
+    gap: 6px;
+  }
+
+  .room-badge {
+    padding: 4px 8px !important;
+    font-size: 0.8rem !important;
+    border-radius: 8px !important;
+    gap: 4px !important;
+  }
+
+  .room-badge-number {
+    font-size: 0.95rem !important;
+    font-weight: 800;
+  }
+
+  .occupancy-pill {
+    padding: 3px 8px !important;
+    font-size: 0.72rem !important;
+    gap: 4px !important;
+    border-radius: 12px !important;
+  }
+
+  .occupancy-pill .pill-text {
+    display: inline !important;
+    font-weight: 600;
+  }
+
+  .room-rent-tag {
+    margin-bottom: 10px !important;
+    padding-bottom: 8px !important;
+    gap: 4px !important;
+  }
+
+  .rent-currency {
+    font-size: 1.15rem !important;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .rent-period {
+    font-size: 0.72rem !important;
+  }
+
+  .tenant-info-block {
+    margin-bottom: 10px !important;
+  }
+
+  .tenant-name-row {
+    margin-bottom: 4px !important;
+  }
+
+  .tenant-name {
+    font-size: 0.95rem !important;
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tenant-phone-row {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px !important;
+    font-size: 0.78rem !important;
+  }
+
+  .tenant-phone-row a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 0.78rem !important;
+  }
+
+  .tenant-phone-row svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  /* Compact secondary details (hidden in 2-column cards, visible in 1-column list & detail modal) */
+  .tenant-notes,
+  .payment-status-title,
+  .payment-date-info,
+  .card-secondary-actions,
+  .whatsapp-reminder-btn,
+  .vacant-desc {
+    display: none !important;
+  }
+
+  .payment-status-block {
+    padding: 8px 10px !important;
+    margin-bottom: 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .payment-status-header {
+    margin-bottom: 0 !important;
+    justify-content: center !important;
+  }
+
+  .payment-badge {
+    font-size: 0.76rem !important;
+    padding: 4px 8px !important;
+    width: 100%;
+    justify-content: center;
+    border-radius: 6px !important;
+  }
+
+  .card-actions-row {
+    gap: 6px !important;
+  }
+
+  .btn-primary-payment {
+    padding: 9px 12px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600;
+    border-radius: 10px !important;
+    min-height: 38px;
+    gap: 5px !important;
+  }
+
+  .btn-primary-payment svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .vacant-body {
+    padding: 12px 4px 8px !important;
+  }
+
+  .vacant-icon-circle {
+    width: 44px !important;
+    height: 44px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .vacant-icon-circle svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .vacant-title {
+    font-size: 0.9rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .btn-assign-tenant {
+    padding: 9px 12px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600;
+    border-radius: 10px !important;
+    min-height: 38px;
+    gap: 5px !important;
+  }
+
+  .btn-assign-tenant svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Tap hint on mobile card */
+  .mobile-tap-card-indicator {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  /* --------------------------------------------------------------------------
+     Alternative List View on Mobile (when toggled)
+     -------------------------------------------------------------------------- */
+  .rooms-grid.view-list {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .rooms-grid.view-list .room-card {
+    padding: 20px !important;
+    min-height: auto;
+    cursor: default;
+  }
+
+  .rooms-grid.view-list .occupancy-pill .pill-text,
+  .rooms-grid.view-list .tenant-phone-row,
+  .rooms-grid.view-list .tenant-notes,
+  .rooms-grid.view-list .payment-status-title,
+  .rooms-grid.view-list .payment-date-info,
+  .rooms-grid.view-list .card-secondary-actions,
+  .rooms-grid.view-list .whatsapp-reminder-btn,
+  .rooms-grid.view-list .vacant-desc {
+    display: flex !important;
+  }
+
+  .rooms-grid.view-list .tenant-notes {
+    display: block !important;
+  }
+
+  .rooms-grid.view-list .payment-status-header {
+    justify-content: space-between !important;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Detail Sheet on Mobile */
+.room-detail-sheet-body {
+  padding: 20px 24px;
+}
+
+.detail-section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.detail-section-row:last-child {
+  border-bottom: none;
+}
+
+.detail-section-label {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.detail-section-val {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}

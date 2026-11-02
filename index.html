@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chandrathil Residency — Rent Management</title>
+  <meta name="description" content="Apple-inspired rent and tenant management portal for Chandrathil Residency, 13-room rental property (Rooms 101–113).">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%231D1D1F%22/><text y=%2265%22 font-size=%2260%22 x=%2222%22 fill=%22%23FFFFFF%22 font-family=%22sans-serif%22 font-weight=%22bold%22>CR</text></svg>">
+</head>
+<body>
+
+  <!-- Sticky Apple-Style Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <!-- Building / Key Apple style icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"></path>
+            <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
+            <path d="M9 9h1"></path>
+            <path d="M9 13h1"></path>
+            <path d="M9 17h1"></path>
+            <path d="M14 9h1"></path>
+            <path d="M14 13h1"></path>
+            <path d="M14 17h1"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Chandrathil Residency</h1>
+          <p>
+            <span>13-Room Rental Property (Rooms 101–113)</span>
+            <span class="badge-tag">₹6,000 / room</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Month Switcher & Actions -->
+      <div class="header-actions">
+        <div class="month-navigator">
+          <button id="prevMonthBtn" class="nav-arrow-btn" title="Previous Month" aria-label="Previous Month">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          
+          <div class="current-month-display" id="currentMonthBtn" title="Click to choose month and year">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span id="currentMonthDisplayLabel">October 2026</span>
+            <input type="month" id="hiddenMonthInput" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
+          </div>
+
+          <button id="nextMonthBtn" class="nav-arrow-btn" title="Next Month" aria-label="Next Month">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <button id="todayMonthBtn" class="today-chip-btn" title="Return to current month">This Month</button>
+
+        <button class="icon-action-btn" onclick="exportDataBackup()" title="Export JSON Backup" aria-label="Export Backup">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+
+        <button class="icon-action-btn" onclick="resetToDefaultSeed()" title="Reset Demo Data" aria-label="Reset Data">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+
+    <!-- Summary Section -->
+    <section class="summary-section">
+      <div class="section-eyebrow">
+        <h2 class="section-title">Rent Summary</h2>
+        <div class="month-context-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="summaryMonthContext">for October 2026</span>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <!-- 1. Collected Rent -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Rent Collected</span>
+            <div class="metric-icon-wrap green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-number collected" id="metricCollected">₹0</span>
+          </div>
+          <span class="metric-subtext" id="metricCollectedSub">0% of total rent</span>
+          <div class="metric-progress-bar">
+            <div class="metric-progress-fill green" id="metricCollectedProgress" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- 2. Rent Still Due -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Rent Still Due</span>
+            <div class="metric-icon-wrap amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-number due" id="metricDue">₹0</span>
+          </div>
+          <span class="metric-subtext" id="metricDueSub">0 rooms pending</span>
+          <div class="metric-progress-bar">
+            <div class="metric-progress-fill amber" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- 3. Occupied Rooms -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Occupied Rooms</span>
+            <div class="metric-icon-wrap blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-number" id="metricOccupied">0 / 8</span>
+          </div>
+          <span class="metric-subtext" id="metricOccupiedSub">0% occupancy rate</span>
+          <div class="metric-progress-bar">
+            <div class="metric-progress-fill blue" style="width: 75%;"></div>
+          </div>
+        </div>
+
+        <!-- 4. Vacant Rooms -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Vacant Rooms</span>
+            <div class="metric-icon-wrap purple">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+            </div>
+          </div>
+          <div class="metric-value-row">
+            <span class="metric-number" id="metricVacant">0 / 8</span>
+          </div>
+          <span class="metric-subtext" id="metricVacantSub">Available for leasing</span>
+          <div class="metric-progress-bar">
+            <div class="metric-progress-fill" style="width: 25%; background: #7943DB;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls Bar: Segmented Filters & Search -->
+    <section class="controls-bar">
+      <!-- Apple-style segmented control -->
+      <div class="segmented-control" role="tablist">
+        <button class="segment-btn active" data-filter="all">
+          <span>All Rooms</span>
+          <span class="segment-count" id="countAll">8</span>
+        </button>
+        <button class="segment-btn" data-filter="occupied">
+          <span>Occupied</span>
+          <span class="segment-count" id="countOccupied">6</span>
+        </button>
+        <button class="segment-btn" data-filter="vacant">
+          <span>Vacant</span>
+          <span class="segment-count" id="countVacant">2</span>
+        </button>
+        <button class="segment-btn" data-filter="due">
+          <span>Rent Due</span>
+          <span class="segment-count" id="countDue">2</span>
+        </button>
+        <button class="segment-btn" data-filter="paid">
+          <span>Paid</span>
+          <span class="segment-count" id="countPaid">4</span>
+        </button>
+      </div>
+
+      <!-- Search & quick filter -->
+      <div class="filter-search-group">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="roomSearchInput" class="search-input" placeholder="Search room or tenant..." autocomplete="off">
+        </div>
+        <button class="view-toggle-btn" id="mobileViewToggleBtn" onclick="toggleMobileGrid()" title="Toggle Grid or List View">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span id="mobileViewToggleText">Grid</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 13 Rooms Grid Container (Rooms 101–113) -->
+    <section class="rooms-grid" id="roomsGridContainer" aria-label="Room cards">
+      <!-- Generated dynamically by app.js -->
+    </section>
+
+  </main>
+
+  <!-- Apple-Style Bottom Sheet / Modal: Add or Edit Tenant -->
+  <div class="modal-overlay" id="tenantModal" role="dialog" aria-modal="true">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="tenantModalTitle">Assign Tenant</h2>
+          <p id="tenantModalSub">Register occupant details</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('tenantModal')" aria-label="Close modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <form id="tenantForm">
+        <input type="hidden" id="targetRoomIdInput" value="">
+        
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="tenantNameInput">
+              Tenant Full Name <span class="req">*</span>
+            </label>
+            <input type="text" id="tenantNameInput" class="form-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tenantPhoneInput">
+              Phone Number
+            </label>
+            <input type="tel" id="tenantPhoneInput" class="form-input" placeholder="+91 98471 23456" autocomplete="tel">
+            <div class="form-help">Enables mobile tap-to-call and WhatsApp rent reminders.</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="tenantRentInput">
+                Monthly Rent (₹)
+              </label>
+              <input type="number" id="tenantRentInput" class="form-input" value="6000" min="1000" step="500">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="tenantMoveInInput">
+                Move-in Date
+              </label>
+              <input type="date" id="tenantMoveInInput" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="tenantNotesInput">
+              Additional Notes (Optional)
+            </label>
+            <textarea id="tenantNotesInput" class="form-textarea" rows="3" placeholder="e.g. Advance deposit ₹12,000, occupation, vehicle number..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('tenantModal')">Cancel</button>
+          <button type="submit" class="btn-save">Save Details</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Apple-Style Confirmation Modal: Mark Room Vacant -->
+  <div class="modal-overlay" id="vacateConfirmModal" role="dialog" aria-modal="true">
+    <div class="modal-sheet" style="max-width: 420px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 style="color: var(--accent-red-text);">Mark Room Vacant?</h2>
+          <p>Confirmation required</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('vacateConfirmModal')" aria-label="Close modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+        <p style="margin-bottom: 12px;">
+          Are you sure you want to mark <strong style="color: var(--text-primary);">Room <span id="vacateRoomNumber">101</span></strong> as vacant?
+        </p>
+        <div style="background: #FFF5F5; border-radius: var(--radius-md); padding: 12px; border: 1px solid rgba(255, 59, 48, 0.2); font-size: 0.82rem; color: var(--accent-red-text);">
+          This will remove <strong id="vacateTenantName">tenant</strong> as the active occupant. Past recorded payments for previous months will be preserved.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal('vacateConfirmModal')">Cancel</button>
+        <button type="button" class="btn-danger" id="confirmVacateBtn">Mark Vacant</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable / Digital Rent Receipt Modal -->
+  <div class="modal-overlay" id="receiptModal" role="dialog" aria-modal="true">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2>Rent Receipt</h2>
+          <p>Official acknowledgement</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('receiptModal')" aria-label="Close modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" id="receiptModalContent">
+        <!-- Receipt preview injected by app.js -->
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal('receiptModal')">Close</button>
+        <button type="button" class="btn-save" onclick="printReceipt()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: -2px; margin-right: 4px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Receipt
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apple-Style Bottom Sheet / Modal: Room Detail View (Mobile & Desktop) -->
+  <div class="modal-overlay" id="roomDetailModal" role="dialog" aria-modal="true">
+    <div class="modal-sheet" style="max-width: 480px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2>Room Details</h2>
+          <p>Tenant & Rent Information</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('roomDetailModal')" aria-label="Close modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div id="roomDetailSheetContent">
+        <!-- Injected dynamically by openRoomDetailSheet(roomId) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Chandrathil Residency</strong> — 13-Room Rental Property Management System (Rooms 101–113)
+      </div>
+      <div class="footer-links">
+        <button class="footer-btn-link" onclick="exportDataBackup()">Download Backup</button>
+        <span>•</span>
+        <button class="footer-btn-link" onclick="resetToDefaultSeed()">Reset Demo</button>
+        <span>•</span>
+        <span>Offline-Ready (LocalStorage)</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>
